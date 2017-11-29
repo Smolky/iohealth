@@ -1,0 +1,289 @@
+/* Font face */
+@font-face {
+    font-family: Neo Sans;
+    src: url("http://155.54.205.223/css-healthio/css/neosans.otf") format("opentype");
+}
+
+.visible-lg.visible-md,
+.visible-md,
+.visible-lg {
+    display: none !important;
+}
+
+.visible-sm {
+    display: block !important;
+}
+
+
+/* Update grid system in mobile */
+@media only screen and (max-width: 40em) {
+    
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}
+
+
+/* General styles */
+/* Normlaize font-size */
+body {
+    font-size: 16px !important;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+a {
+    color: #4fc1e9;
+}
+
+a:hover, a:focus, a:visited {
+    color: #3bafda;
+}
+
+h1, h2, h3 {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 300;
+    line-height: 1;
+    margin: 0;
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+
+/* Update forms */
+.btn {
+    border-radius: .5rem;
+}
+
+.btn-inverse {
+    background-color: #3bafda;
+    color: white;
+}
+
+.form-control {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+
+/* Avoid loading background image */
+.body-landing {
+    background-image: none;
+    background-color: #fff;
+}
+
+/* Landing page, remove spaces */
+.body-landing .floating-desktop, 
+.body-landing .floating-mobile {
+    padding: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.container #content {
+    width: 100%;
+}
+
+.body-landing .floating-mobile {
+    margin: 0;
+}
+
+.body-landing .floating-desktop, 
+.body-landing .floating-mobile {
+    padding: .5rem;
+}
+
+
+/* For ipad, make column layout */
+.body-landing [class^="col"] {
+    float: none;
+    width: 100%;
+    border: none !important;
+}
+
+.body-landing #content {
+    margin: auto;
+    text-align: center;
+}
+
+.body-landing .form-group > div {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+
+/* Update style to buttons */
+.body-landing .floating-mobile .btn {
+    margin: 0 0 1rem 0;
+}
+
+
+
+/* To set the footer at the end of the page */
+.body-landing .floating-mobile .padding-top-60 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 0;
+    line-height: 2;
+    background: #555;
+    color: white;
+}
+
+.body-landing .floating-desktop {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;    
+    box-shadow: none !important;
+    transform: none;
+    -webkit-transform: none;
+}
+
+/* Header */
+.inh_nomargin-top {
+    margin: 0 !important;
+    padding: 0;
+    background: #4fc1e9;
+    color: white;
+    overflow: hidden;
+}
+
+.inh_nomargin-top img {
+    float: left;
+}
+
+.inh_nomargin-top p {
+    font-size: 3.5rem;
+    vertical-align: middle;
+    margin-top: 4rem;
+    text-align: left;
+    margin-left: 11rem;
+    font-weight: 300;
+}
+
+
+/* Sign up page */
+#content {
+    padding: 0 !important;
+}
+
+.navbar-toggle {
+    top: 1rem;
+    right: 1rem;    
+    width: 4rem;
+    height: 4rem;
+    background: #2a7038 !important;
+    margin: 0;
+    border-radius: 100%;
+    text-align: center;
+}
+
+.navbar-toggle .icon-bar {
+    height: 1px;
+    margin: auto;
+    width: 88%;
+}
+
+#sidebar-left {
+    background-color: #3bafda;
+    position: fixed;
+    left: -100%;
+    width: 100%;
+    top: 0;
+    z-index: 50000;
+    bottom: 0;    
+}
+
+footer {
+    background-color: transparent;
+}
+
+#sidebar-left a {
+    position: relative;
+    display: block;
+    border-bottom: 1px dotted #ccc;
+    line-height: 2;
+    text-align: center;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 1.5rem;
+    padding-left: 2rem;
+    margin: .5rem 0;
+    border-radius: .75rem;
+    overflow: hidden;
+    background: #f0f0f0;
+    color: black;
+}
+
+#sidebar-left .text-muted {
+    color: white;
+}
+
+#sidebar-left a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 1.15rem;
+    background-color: crimson;
+}
+
+#sidebar-left br {
+    display: none;
+}
+
+.navbar,
+.cr-navbar .navbar-brand {
+    margin: 0 !important;
+    padding: 0;
+    background-color: transparent !important;
+}
+
+
+/* map */
+#map {
+    margin: 0;
+}
+
+#map + .thumbnail {
+    padding: 0;
+}
+
+
+
+/* Table */
+table.table tr {
+    display: block;
+}
+
+table.table td,
+table.table th {
+    display: block;
+}
+
+table.table td {
+
+}
+
+table.table th {
+
+}
+
+
