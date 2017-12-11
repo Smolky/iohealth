@@ -229,6 +229,10 @@ textarea[readonly] {
     overflow: hidden;
 }
 
+.body-landing .inh_nomargin-top {
+    background-color: #3bafda;
+}
+
 .inh_nomargin-top img {
     float: left;
 }
