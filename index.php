@@ -25,11 +25,13 @@ $cookies = "remember_82e5d2c56bdd0811318f0cf078b78bfc=eyJpdiI6InVWNXBuVGRXbXRSaH
 $url = '';
 switch ($page) {
     case '':
+    case 'auth';
     case 'login';
         $cookies = '';
         $url = '';
         break;
-        
+    
+    case 'auth/signup':
     case 'signup':
         $cookies = '';
         $url = 'auth/signup';
@@ -64,11 +66,21 @@ $content = file_get_contents ("http://iohealth.nimbeo.com/" . $url, false, $cont
 // If the query was to the API, we are going to return a JSON response
 $parts = explode ('/', $page);
 $parts = explode ('?', $parts[0]);
-if (in_array ($parts[0], ['personsData', 'personInfo', 'personAlerts'])) {
+if (in_array ($parts[0], ['personsData', 'personInfo', 'personAlerts']) || strpos ($_SERVER['REQUEST_URI'], 'report/table') !== false) {
     header ("Content-Type: application/json");
     echo $content;
     die ();
 }
+
+
+
+
+$content = str_replace (
+    "ajax: 'http://iohealth.nimbeo.com/report/table?mode=all' + template_filter,", 
+    "ajax: '" . $base_url . "report/table?mode=all' + template_filter,",  
+    $content
+);
+
 
 
 // If not, return the parsed HTML
@@ -84,7 +96,20 @@ foreach ($dom->getElementsByTagName('a') as $anchor) {
     if (strpos ($anchor->getAttribute ('href'), 'javascript') === 0) {
         continue;
     }
-
+    
+    if ($anchor->getAttribute ('href') == '#') {
+        continue;
+    }
+    
+    
+    // Canonical
+    if ($anchor->getAttribute ('href') == 'http://iohealth.nimbeo.com') {
+        $anchor->setAttribute ('href',  $base_url);
+        continue;
+    }
+    
+    
+    // The rest of cases, convert urls to local
     $anchor->setAttribute ('href',  $base_url . str_replace ('http://iohealth.nimbeo.com/', '', $anchor->getAttribute ('href')) );
 }
 

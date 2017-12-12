@@ -35,25 +35,20 @@
 }
 
 
-/* Update grid system in mobile */
-@media only screen and (max-width: 40em) {
-    
-    .row {
-        margin-left: 0;
-        margin-right: 0;
-    }
-    
-    .container {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    .col-xs-12,
-    .col-lg-12 {
-        padding-left: 0;
-        padding-right: 0;
-    }
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
 
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-xs-12,
+.col-lg-12 {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 
@@ -83,7 +78,7 @@ h1, h2, h3 {
     padding: 1rem;
     font-size: 2rem;
     font-weight: 300;
-    font-style: italic;
+    font-style: normal;
 }
 
 form {
@@ -114,6 +109,8 @@ form .radio :checked + span:before {
 }
 
 
+
+
 /* Update forms */
 .btn {
     border-radius: .5rem;
@@ -130,6 +127,8 @@ form .radio :checked + span:before {
 }
 
 .form-group .col-sm-9 {
+    width: 100%;
+    float: none;
     padding-left: 0;
     padding-right: 0;
 }
@@ -231,6 +230,7 @@ textarea[readonly] {
 
 .body-landing .inh_nomargin-top {
     background-color: #3bafda;
+    color: white;
 }
 
 .inh_nomargin-top img {
@@ -238,12 +238,13 @@ textarea[readonly] {
 }
 
 .inh_nomargin-top p {
-    font-size: 3.5rem;
-    vertical-align: middle;
     margin-top: 4rem;
-    text-align: left;
     margin-left: 11rem;
+    vertical-align: middle;
+    font-size: 3.5rem;
     font-weight: 300;
+    text-align: left;
+    color: white;
 }
 
 
@@ -254,17 +255,8 @@ textarea[readonly] {
 
 
 /* Menu */
-.nav-tabs [class^="icon-"], 
-.nav-pills [class^="icon-"], 
-.nav-tabs [class*=" icon-"], 
-.nav-pills [class*=" icon-"], 
-.nav-tabs [class^="icon-"].icon-large, 
-.nav-pills [class^="icon-"].icon-large, 
-.nav-tabs [class*=" icon-"].icon-large, 
-.nav-pills [class*=" icon-"].icon-large {
-    width: 3rem;
-    display: inline-block;
-    text-align: center;
+.sidebar-nav > ul {
+    margin: 0 !important;
 }
 
 .navbar-toggle {
@@ -272,7 +264,7 @@ textarea[readonly] {
     right: 1rem;    
     width: 4rem;
     height: 4rem;
-    background: #2a7038 !important;
+    background: #3bafda !important;
     margin: 0;
     border-radius: 100%;
     text-align: center;
@@ -295,28 +287,13 @@ body.state-menu .navbar-toggle {
     height: 1px;
     margin: auto;
     width: 88%;
-}
-
-#sidebar-left {
-    background-color: #3bafda;
-    position: fixed;
-    left: -100%;
-    width: 80%;
-    top: 0;
-    z-index: 50000;
-    bottom: 0;
-    
-    border-right: 1px solid black;
-    box-shadow: 0 0 10rem #666;    
-    
-    -webkit-transition: left .3s ease-out;
-            transition: left .3s ease-out;
-    
+    background-color: white;
 }
 
 .navbar-collapse {
     height: auto !important;
     max-height: none !important;
+    padding: 0;
 }
 
 body.state-menu #sidebar-left {
@@ -327,38 +304,95 @@ footer {
     background-color: transparent;
 }
 
+#sidebar-left {
+    background-color: #3bafda;
+    position: fixed;
+    left: -100%;
+    width: 80% !important;
+    top: 0;
+    z-index: 50000;
+    bottom: 0;
+    padding-top: 0 !important;
+    
+    border-right: 1px solid black;
+    box-shadow: 0 0 10rem #666;    
+    
+    -webkit-transition: left .3s ease-out;
+            transition: left .3s ease-out;
+    
+}
+
 #sidebar-left a {
     position: relative;
     display: block;
     border-bottom: 1px dotted #ccc;
+    border-radius: 0;
     line-height: 2;
     text-align: center;
     text-transform: uppercase;
     text-align: left;
     font-size: 1.5rem;
-    padding-left: 2rem;
+    padding: .3rem 1rem .3rem 5rem;
     margin: .5rem 0;
-    border-radius: .75rem;
-    overflow: hidden;
     background: #f0f0f0;
     color: black;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+}
+
+#sidebar-left li:nth-child(odd) a {
+    background-color: #f7f7f7;
+}
+
+#sidebar-left li.company a {
+    background-color: #333;
+    color: white;
+}
+
+#sidebar-left li.active a {
+    background-color: #3bafda;
+    color: white;
+}
+
+#sidebar-left a span:first-child,
+#sidebar-left a i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-right: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 4rem;
+    padding: 0;
+    line-height: 3rem;
+    color: inherit;
+    opacity: .3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #sidebar-left .text-muted {
     color: white;
 }
 
-#sidebar-left a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 1.15rem;
-    background-color: crimson;
+#sidebar-left br {
+    display: none;
 }
 
-#sidebar-left br {
+#main-menu-toggle {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+}
+
+.body-landing .navbar-toggle {
     display: none;
 }
 
@@ -368,6 +402,10 @@ footer {
     padding: 0 !important;
     background-color: transparent !important;
     height: auto;
+}
+
+.navbar > .container .navbar-brand {
+    width: 100%;
 }
 
 .navbar {
@@ -599,7 +637,8 @@ table.table th {
 
 /* Custom forms */
 .form-horizontal .form-group {
-    margin: 0 0 1rem 0 !important;
+    max-width: 40rem;
+    margin: 0 auto 1rem auto !important;
 }
 
 .report-data-view label.control-label,
@@ -611,7 +650,7 @@ table.table th {
     font-weight: 400;
     font-size: 1.5rem;
     font-family: monospace;
-    width: auto;
+    width: 100%;
     text-align: left;
 }
 
@@ -795,6 +834,11 @@ body:not(.state-header-fullwidth) #cr-navbar ~ .container {
     top: -2rem;
     z-index: 1000;
 }
+
+#content > .container .col-sm-6 {
+    width: 100%;
+}
+
 
 /* To catch only the signup form */
 form[action$="auth/signup"] [type="submit"] {
