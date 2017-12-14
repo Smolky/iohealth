@@ -44,35 +44,41 @@ switch ($page) {
 }
 
 
-$opts = [
-    'http'=> [
-        'method'=>"GET",
-        'header'=> 
-            "Accept-language: es\r\n" .
-            "Cookie: " . $cookies
-    ]
-];
+// Get request URI
+$parts = explode ('/', $page);
+$parts = explode ('?', $parts[0]);
 
 
+// Prepare headers
+$headers = [];
+$headers[] = "Cookie: " . $cookies;
+if (isset ($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    $headers[] = "X-Requested-With: XMLHttpRequest";
+}
 
-// Create context
-$context = stream_context_create ($opts);
+
+// Fetch curl request
+$ch = curl_init ();
+curl_setopt ($ch, CURLOPT_URL, "http://iohealth.nimbeo.com/" . $url);
+curl_setopt ($ch, CURLOPT_HEADER, false);
+curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt ($ch, CURLOPT_HTTPHEADER, $headers);
 
 
-// Get content
-$content = file_get_contents ("http://iohealth.nimbeo.com/" . $url, false, $context); 
+// Fetch curl response
+$content = curl_exec ($ch);
+$content_type = curl_getinfo ($ch, CURLINFO_CONTENT_TYPE);
+curl_close ($ch);
+
 
 
 // If the query was to the API, we are going to return a JSON response
-$parts = explode ('/', $page);
-$parts = explode ('?', $parts[0]);
-if (in_array ($parts[0], ['personsData', 'personInfo', 'personAlerts']) || strpos ($_SERVER['REQUEST_URI'], 'report/table') !== false) {
+if ($content_type != 'text/html; charset=UTF-8') {
     header ("Content-Type: application/json");
     echo $content;
     die ();
 }
-
-
 
 
 $content = str_replace (
@@ -81,6 +87,11 @@ $content = str_replace (
     $content
 );
 
+$content = str_replace (
+    'var $SITE_PATH = "http://iohealth.nimbeo.com/"', 
+    'var $SITE_PATH = "http://155.54.205.191/css-healthio/"', 
+    $content
+);
 
 
 // If not, return the parsed HTML

@@ -11,13 +11,20 @@ $(document).ready (function () {
     var sidebar = $('#sidebar-left');
     
     
+    
     // Remove garbage
     $('.navbar-brand').removeAttr ('style');
+    
+    
+    // Wrapp tables
+    $('#dataTable_wrapper').find ('table').wrap('<div class="table-scrollbar"></div>')
+    
     
     
     // Remove unwainting things of the footer
     sidebar.find ('footer p:first-child').remove ();
     sidebar.find ('footer').eq (1).remove ();
+    
     
     
     // Change anchor to be inside list items
