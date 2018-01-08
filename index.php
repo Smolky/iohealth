@@ -17,8 +17,7 @@ $page = str_replace ($base_url, '', $_SERVER['REQUEST_URI']);
 
 
 // To proxy authentication
-$cookies = "remember_82e5d2c56bdd0811318f0cf078b78bfc=eyJpdiI6InVWNXBuVGRXbXRSaHgxcWhCMENcL2JRPT0iLCJ2YWx1ZSI6InFBZ1dsbFJuTjFtXC9zcUZGUHllZjhoRXdWVzBEdXI2XC94QjJMK3JranNaTmNcL05od21GZUlzanUxY2kxbmF5SHFsR2FNOE4yXC9jWDdMQWVLdGFrbHVBa2RndXA5dmcwQThxSys3QXFyYitoYz0iLCJtYWMiOiIyMGJjYTI5OWFiNjRlMGNhOTcwNDI0MDhiZWE0MzI2ZWExYTRjOWIyZTdjOTJmNGVjY2EyNWM5MjQ1NGI5YThlIn0%3D; from=" . time () . "; to=1512946800000; laravel_session=eyJpdiI6IjJZbEpRQW1vQ0lzK0FcL2V1OFUxTmNRPT0iLCJ2YWx1ZSI6IlNzd09LTktQNjRDd3BRZDhpMUNJSW5iQ2dxaGFIcTdVYTNhZGRLRnROQ1laZHltbXV5M2VCTTF2TWVwaHZ1U1E1eHFCMURLRVMxSFc5TmRWemtIanFBPT0iLCJtYWMiOiI2YmI5ZjQ4OWI4ZWFkNDlkOThiMzBhYjkzNmY3ZGQwOTE3MWNkMzI4YzgwODNmOGYzN2Q1ZjRiZTVmYmZmN2I4In0%3D";
-
+$cookies = "remember_82e5d2c56bdd0811318f0cf078b78bfc=eyJpdiI6IkxERHRzdU5wZ0pmWlFJekhWVGwxWkE9PSIsInZhbHVlIjoiaVBcL3BIUThZQUtQeWNBemVzY2ZiMDJidXJKQ1picHBjRzN4d25PWVE5eGRQWlN6TjhORlljZmFBRTd6RFpJVjlKOFpFMVVLdlI3QU1MTW1yNDdxVVdLRlVjQU80UFwvdFhSOWpvYVpiZzY5az0iLCJtYWMiOiI3N2Y3ZmVhNTk5OTAyNGU1OWVhZWEwZGJjMzA1M2UwMzE1ZmVkZmQ5M2NlNTQ0Nzc0ZjRlNmJmNWI1YTE1MTBiIn0%3D";
 
 
 // What to load?
@@ -89,7 +88,7 @@ $content = str_replace (
 
 $content = str_replace (
     'var $SITE_PATH = "http://iohealth.nimbeo.com/"', 
-    'var $SITE_PATH = "http://155.54.205.191/css-healthio/"', 
+    'var $SITE_PATH = "http://155.54.205.81/css-healthio/"', 
     $content
 );
 

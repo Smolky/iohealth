@@ -97,6 +97,12 @@ a:hover, a:focus, a:visited {
     color: #3bafda;
 }
 
+.label-info a , 
+.badge-info, .label-info[href], .badge-info[href] a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 
 /* Normalize titles */
 h1, h2, h3 {
@@ -153,6 +159,9 @@ form .radio :checked + span:before {
     content: "\f046";
 }
 
+.form-report {
+    margin: 1rem;
+}
 
 /* Datatable */
 #dataTable_wrapper {
@@ -207,6 +216,29 @@ form .radio :checked + span:before {
 }
 
 
+.jumbotron {
+    margin: 0;
+    border: none;
+    border-radius: 0 !important;
+    padding: 0 0 1rem 0;
+    font-family: arial, sans-serif;
+}
+
+.jumbotron h1 {
+    background-color: white;
+    padding: .33rem 1rem;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.jumbotron p {
+    padding: .33rem 1rem;
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+}
+
+
 /* Remove horizontal rules */
 hr {
     display: none;
@@ -223,15 +255,25 @@ hr {
     color: white;
 }
 
+.btn-primary {
+    color: white !important;
+}
+
 
 /* Landing page */
 /* -------------------------------------------------------------------------- */
 .body-landing {
+
+    /* Center */
+    max-width: 64rem;
+    margin: auto;
+    overflow: hidden;    
+
+    
     /* Avoid loading background image. With important we force to load this style first */
     background: none !important;
     background-image: none !important;
-    background-color: #fff;
-    overflow: hidden;
+    background-color: #fff !important;
 }
 
 /* Remove spaces */
@@ -302,6 +344,8 @@ hr {
 }
 
 .body-landing .inh_nomargin-top {
+    padding-left: 0;
+    padding-right: 0;
     background-color: #3bafda;
     color: white;
 }
@@ -334,7 +378,8 @@ hr {
 }
 
 .navbar-toggle {
-    top: 1rem;
+    position: fixed;
+    top: .33rem;
     right: 1rem;    
     width: 2.5rem;
     height: 2.5rem;
@@ -366,8 +411,9 @@ hr {
 }
 
 .navbar-collapse {
-    height: auto !important;
-    max-height: none !important;
+    position: relative;
+    height: 100% !important;
+    max-height: 100% !important;
     padding: 0;
 }
 
@@ -382,7 +428,7 @@ hr {
     padding-top: 0 !important;
     
     border-right: 1px solid black;
-    box-shadow: 0 0 10rem #666;    
+    box-shadow: 0 0 .33rem black;
     
     -webkit-transition: left .3s ease-out;
             transition: left .3s ease-out;
@@ -476,12 +522,13 @@ hr {
     margin: 0 !important;
     padding: 0;
     background-color: #333 !important;
+    min-height: 0;
 }
 
 .cr-navbar .navbar-brand img {
     position: absolute;
     right: 3rem;
-    top: .44rem;
+    top: 0;
     z-index: 50;
     height: 3rem;
     margin: 0 auto;
@@ -517,6 +564,13 @@ form[action$="auth/signup"] > p:last-child {
     font-family: arial;
     text-align: center;
     line-height: 1;
+}
+
+form[action$="auth/signup"].form-horizontal .form-group label {
+    width: auto;
+    margin-right: 2rem;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* profile */
@@ -580,6 +634,10 @@ body:not(.body-landing) .page-header p {
 
 /* map */
 /* ----------------------------------------------------------- */
+.headline h3 {
+    padding: .3rem .7rem;
+}
+
 #map {
     margin: 0;
 }
@@ -632,10 +690,6 @@ body:not(.body-landing) .page-header p {
     color: #665;
 }
 
-.box .box-header.level-2 {
-    margin-bottom: 1rem;
-}
-
 .box .box-header h2 i {
     background-color: transparent;
 }
@@ -675,9 +729,21 @@ body:not(.body-landing) .page-header p {
     padding: 0 1rem;
 }
 
+.box .box-header #refresh:active {
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+}
+
+.box .box-header #refresh i {
+    margin: 0;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 1.5rem;
+    background: #7A5D00;    
+}
+
 .box .box-header h2 {
     float: none;
-    padding: 0;
     margin: 0;
     line-height: 2;
     padding: 0.5rem 0;
@@ -686,13 +752,27 @@ body:not(.body-landing) .page-header p {
 
 .box .box-header h2 i {
     background-color: transparent;
-    vertical-align: middle;
+    vertical-align: top;
     padding: 0;
     width: auto;
     margin: 0;
     float: right;
     line-height: 1.5;
     font-size: 2rem;
+}
+
+.box .box-header.level-2 {
+    margin-bottom: 1rem;
+}
+
+.box .box-header.level-2 h2 {
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.box .box-header.level-2 h2 i {
+    font-size: 1rem;
+    line-height: 1;
 }
 
 .box-content .form-horizontal .form-group {
@@ -779,12 +859,11 @@ body:not(.body-landing) .page-header p {
 
 .navbar .search-open {
     position: fixed;
-    left: 4.5rem;
+    left: 3rem;
     right: 0;
-    top: 8rem;
+    top: 2.55rem;
     margin: 0;
     text-align: left;
-    padding: .5rem;
     z-index: 500;
     padding: 0;
     background: transparent;
@@ -796,7 +875,7 @@ body:not(.body-landing) .page-header p {
 
 #search-extendible input {
     width: 100%;
-    padding: 10px 8px;
+    padding: .6rem .5rem;
 }
 
 
@@ -844,6 +923,11 @@ body:not(.body-landing) .page-header p {
 
 .insert-template {
     min-height: 100vh;
+}
+
+.form-report .form-control {
+    margin: 0 0 1rem 0;
+    background-color: white;
 }
 
 .report-data-view div.form-group {
@@ -963,6 +1047,19 @@ body:not(.body-landing) .page-header p {
 }
 
 
+/* State */
+label[for="select-person"] {
+    margin: 1rem !important;
+}
+
+#select-person {
+    margin: 1rem 1rem 2rem 1rem;
+    width: 90%;
+    box-sizing: border-box;
+    display: block;
+    font-size: 1.5rem;
+    height: auto;
+}
 
 #personState p {
     font-weight: 400;
@@ -970,10 +1067,16 @@ body:not(.body-landing) .page-header p {
     margin: 0 1rem;
 }
 
+#personState p:before {
+    content: "- ";
+    position: absolute;
+    margin-left: -1rem;    
+}
+
 #actual h2.inh_bold {
-    font-weight: 400 !important;
+    font-weight: bold !important;
     font-style: normal;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0;
     padding: 0;
     line-height: 1.5;    
@@ -983,15 +1086,18 @@ body:not(.body-landing) .page-header p {
     background-color: #f0f0f0;
 }
 
-
-/* Shame */
-/* To override the header height in the inner pages */
-body:not(.state-header-fullwidth) #cr-navbar ~ .container {
-    position: relative;
-    top: -2rem;
-    z-index: 1000;
+#personState h2 {
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
+#personState h2:only-child b {
+    font-weight: 400;
+}
+
+
+
+/* Shame */
 #content > .container .col-sm-6 {
     width: 100%;
 }

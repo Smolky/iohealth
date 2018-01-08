@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+        <!-- Title -->
+        <title>IO Health</title>
+        
+        
+        <!-- Metas -->
+        <meta charset="utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        
+        <!-- LOAD style-sheets -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+        
+        <!-- Load JS libraries -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+        <script>
+        
+            /* body DOM element */
+            var body;
+
+
+            /* @var ref cordova.InAppBrowser The reference to the browser */
+            var ref;
+
+
+            /* @var url String */
+            var url = "http://iohealth.nimbeo.com/health";
+
+
+            /* @var loaded Boolean Tells wheter the page has been loaded or not */
+            var loaded = false;
+
+
+            /* @var options String @link https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-inappbrowser/ */
+            var options="location=no,hidden=yes,clearcache=yes,toolbar=no,zoom=no,hardwareback=true,useWideViewPort=yes";
+            
+            
+            /* @var js_loaded Boolean */
+            var js_loaded = false;
+            
+            
+            /* @var css_loaded Boolean */
+            var css_loaded = false;
+            
+
+
+            // Wait for device API libraries to load
+            function onLoad () {
+                
+                // Fetch body
+                body = $('body');
+
+                
+                // Check
+                body.addClass ('loading-state');
+                document.addEventListener ("deviceready", onDeviceReady, false);
+                
+                
+                
+                // Offline and online events
+                document.addEventListener ("offline", function () {
+                
+                    // The page is loaded. Unload the browser, back to us
+                    if (loaded) {
+                        ref.close ();
+                        ref = undefined;
+                        loaded = false;
+                    }
+                    
+                    body.addClass ('error-state');
+                    
+                }, false);
+                
+                
+                document.addEventListener ("online", function () {
+                
+                    if ( ! loaded) {
+                        loadPage ();
+                    }
+                
+                    body.removeClass ('error-state');
+                }, false);
+                
+            }
+            
+            
+            /**
+             * show_webview
+             *
+             * shoss the page when js and css are loaded
+             */
+            var show_webview = function () {
+                if (css_loaded && js_loaded) {
+                    
+                    // Show
+                    ref.show ();
+                    
+                    
+                    // Stop loading
+                    body.removeClass ('loading-state');
+                
+                
+                    // Set to loaded
+                    loaded = true;
+                        
+
+                }
+            }
+            
+
+            // Load WebPage
+            function loadPage () {
+                
+                // Open
+                ref = cordova.InAppBrowser.open (url, "_self", options);
+                
+                
+                // Register events
+                // Errors
+                ref.addEventListener ('loaderror', loadErrorCallBack);
+                
+                
+                // Load start. When a page changes...
+                ref.addEventListener ('loadstart', function () {
+                    body.addClass ('loading-state');
+                    ref.hide ();
+                });
+                
+                
+                // Exit application
+                ref.addEventListener ('exit', function () {
+                
+                    // Has the user exit manually?
+                    if (loaded) {
+                        navigator.app.exitApp ();
+                    }
+                });
+                
+                
+                
+                // Stop
+                ref.addEventListener ('loadstop', function () { 
+                    
+                    // Inject code to add a class to indicate the content
+                    // has been loaded whitin some kind of iframe
+                    $.get ('css/custom.css', function (css) {
+                        ref.insertCSS ({
+                            code: css
+                        });
+                        css_loaded = true;
+                        show_webview ();
+                    })
+                    
+                    
+                    $.get ('js/custom.js', function (js) {
+                        ref.executeScript ({
+                            code: js
+                        });
+                        js_loaded = true;
+                        show_webview ();
+                    });
+                });
+            }
+
+
+            // Handle error
+            function loadErrorCallBack () {
+                body.removeClass ('loading-state');
+                body.addClass ('error-state');
+            }
+
+
+            // device APIs are available
+            function onDeviceReady () {
+            
+                // Bind DOM events
+                $('.reload-action').click (function (e) {
+                    location.reload (); 
+                });
+                
+                $('.exit-action').click (function (e) {
+                    navigator.app.exitApp ();
+                });
+                
+
+                // Check connection
+                if (navigator.connection.type === Connection.NONE) {
+                    loadErrorCallBack ();
+                    return;
+                } else {
+                    loadPage ();
+
+                }
+
+            }        
+        </script>
+        
+    </head>
+
+    <body class="loading-state" onload="onLoad()">
+    
+        <!-- Spinner -->
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+        
+    
+        <!-- No connection fallback -->
+        <article class="message">
+        
+            <header class="message-header">
+                <h1 class="message-title">
+                    Sin conexión
+                </h1>
+            </header>
+            
+            <div class="message-body">
+            
+                <span class="message-icon icon-cancel-circled"></span>
+            
+                <p class="message-text">
+                    No hemos podido cargar el contenido
+                </p>
+                
+                <p class="message-text">
+                    <strong>¿Tiene conexión?</strong>
+                </p>
+                
+                <button type="button" class="reload-action">
+                    <span class="icon-arrows-cw"></span> Reintentar
+                </button>
+                
+            </div>
+            
+            <div class="message-actions">
+                <button type="button" class="exit-action">
+                    No, quiero salir
+                </button>
+            </div>
+            
+        </article>        
+        
+    </body>
+    
+</html>
