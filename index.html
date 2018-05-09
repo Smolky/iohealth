@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+        <!-- Title -->
+        <title>IO Health</title>
+        
+        
+        <!-- Metas -->
+        <meta charset="utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        
+        <!-- LOAD style-sheets -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+        
+        <!-- Load JS libraries -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/bootstrap.js"></script>
+        
+    </head>
+
+    <body class="loading-state" onload="onLoad()">
+    
+        <!-- Spinner -->
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+        
+    
+        <!-- No connection fallback -->
+        <article class="message">
+        
+            <header class="message-header">
+                <h1 class="message-title">
+                    Sin conexión
+                </h1>
+            </header>
+            
+            <div class="message-body">
+            
+                <span class="message-icon icon-cancel-circled"></span>
+            
+                <p class="message-text">
+                    No hemos podido cargar el contenido
+                </p>
+                
+                <p class="message-text">
+                    <strong>¿Tiene conexión?</strong>
+                </p>
+                
+                <button type="button" class="reload-action">
+                    <span class="icon-arrows-cw"></span> Reintentar
+                </button>
+                
+            </div>
+            
+            <div class="message-actions">
+                <button type="button" class="exit-action">
+                    No, quiero salir
+                </button>
+            </div>
+            
+        </article>        
+        
+    </body>
+    
+</html>
